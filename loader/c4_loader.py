@@ -1,4 +1,4 @@
-from datasets import load_dataset
+from datasets import load_dataset, disable_caching
 from transformers import DataCollatorForLanguageModeling
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
@@ -92,6 +92,7 @@ def get_c4_loader_from_collate_fn(
     ds_path="/projectnb/aclab/datasets/c4/en/", 
     num_workers=2,
     output_format='torch'):
+    disable_caching()
     c4 = load_dataset('c4', 'en', data_dir=ds_path, streaming=True, split=split)
     c4 = c4.filter(lambda x: len(x['text']) > 1)
     if shuffle_buffer_size > 0:
