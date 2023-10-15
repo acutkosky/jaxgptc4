@@ -330,6 +330,7 @@ def load_c4_data(config: DictConfig, tokenizer: Any, split: str = "train"):
         max_length=config.model.context_length,
         pad_to_multiple_of=config.model.context_length,
         num_workers=config.train.dataloader_workers,
+        ds_path=config.train.data_path,
     )
     return loader
 
@@ -346,6 +347,7 @@ def train(config: DictConfig) -> None:
     if config.train.wandb_project is not None:
         limited_log = RateLimitedWandbLog(config.train.wandb_logs_per_sec)
         wandb.init(project=config.train.wandb_project)
+        wandb.config.update(OmegaConf.to_container(config))
     else:
         limited_log = None
 

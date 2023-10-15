@@ -7,6 +7,8 @@ model:
   rescale_residuals: False 
 
 train:
+  data_path: "/projectnb/aclab/datasets/c4/en/"
+  
   max_steps: 10000
 
   # whether to use automatic mixed precision

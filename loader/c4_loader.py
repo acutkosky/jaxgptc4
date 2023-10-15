@@ -80,26 +80,6 @@ def get_c4_loader_next_token(tokenizer, split, batch_size, max_length=None, shuf
                                          output_format=output_format)
                                     
 
-def get_c4_loader_lm(tokenizer, split, batch_size, mlm, mlm_probability, shuffle_buffer_size=0,
-                     max_length=None, pad_to_multiple_of=0, random_start=False,
-                     num_workers=2, output_format='torch', **collator_args):
-    collate_fn = DataCollatorForLanguageModeling(tokenizer,
-                                                 mlm=mlm,
-                                                 mlm_probability=mlm_probability,
-                                                 pad_to_multiple_of=pad_to_multiple_of,
-                                                 **collator_args)
-
-    return get_c4_loader_from_collate_fn(tokenizer=tokenizer,
-                                         split=split,
-                                         batch_size=batch_size,
-                                         max_length=max_length,
-                                         shuffle_buffer_size=shuffle_buffer_size,
-                                         random_start=random_start,
-                                         collate_fn=collate_fn,
-                                         ds_path=ds_path,
-                                         num_workers=num_workers,
-                                         output_format=output_format)
-
 
 def get_c4_loader_from_collate_fn(
     tokenizer, 
