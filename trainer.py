@@ -187,7 +187,7 @@ def train_loop(
     iteration_timing_events = ["iteration", "dataloader", "train_step"]
     time_keeper.mark(start_events=["dataloader", "iteration", "tokens", "samples"])
     for it, batch in pbar:
-        if it > config.train.max_iter:
+        if it > config.train.max_steps:
             break
         tokens = jnp.sum(jnp.asarray(batch["attention_mask"]))
         input_ids = jnp.asarray(batch["input_ids"])
